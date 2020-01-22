@@ -1,0 +1,27 @@
+from manimlib.imports import *
+
+class JoshyScene(Scene):
+    def construct(self):
+        hypnotizing_circle = Circle()
+        self.play(Write(hypnotizing_circle))
+        second_hypnotizing_circle = Circle()
+        second_hypnotizing_circle.set_width(5)
+        self.play(Write(second_hypnotizing_circle))
+        circle_3 = Circle()
+        circle_3.set_width(8)
+        self.play(Write(circle_3))
+        center = Dot()
+        center.set_width(0)
+        self.play(Transform(second_hypnotizing_circle, center), Transform(hypnotizing_circle, center), Transform(circle_3, center))
+        square_1 = Square()
+        square_1.set_width(3)
+        square_1.next_to(circle_3, RIGHT,buff=2)
+        square_2 = Square()
+        square_2.set_width(3)
+        square_2.next_to(circle_3, LEFT,buff=2)
+        self.play(Rotate(square_1, 10 * math.radians(360)), Rotate(square_2, 10 * math.radians(360)))
+        self.play(square_1.move_to,center.get_center(),rate_func = smooth)
+        self.play(square_2.move_to,center.get_center(),rate_func = smooth)
+        self.play(Transform(square_1, center))
+        self.wait(1)
+        self.play(Transform(square_2, center))
